@@ -1,0 +1,14 @@
+{
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "build"],
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "declaration": false,
+    "declarationMap": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true
+  }
+}
