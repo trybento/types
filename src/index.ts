@@ -4,7 +4,7 @@ export type BentoInstance = {
    */
   initialized: boolean;
   /**
-   * Currenly, this is the same as calling `initialize`.
+   * Currently, this is the same as calling `initialize`.
    *
    * @deprecated use `initialize` instead. This will be removed on June 1, 2023 */
   identify(bentoSettings?: BentoSettings): Promise<boolean>;
@@ -29,7 +29,8 @@ export type BentoInstance = {
 
 export type DynamicAttributes = {
   /**
-   * You may also add any additional attributes you want associated with this account/accountUser within Bento
+   * You may also add any additional attributes you want associated with this account/accountUser within Bento,
+   * for example what products they bought, their pricing tier, or user role.
    */
   [attributeName: string]: string | Date | number | boolean | string[] | undefined;
 };
@@ -38,22 +39,22 @@ export type BentoSettings = {
   /**
    * Your unique app identifier provided by Bento.
    *
-   * Tip: Can be found in Org settings > Integrations
+   * Tip: Can be found in the Integrations page.
    */
   appId: string;
   /**
-   * Accounts represent your customers or organizations.
-   * For example, a company called "AcmeCo". Or a company you would sell your product to.
+   * Accounts represent your customers.
+   * For example, a company called "AcmeCo". 
    */
   account: {
     /**
      * Unique identifier for the account
-     * This is best set to something used internally by your app
+     * This is best set to something used internally by your app like an id or slug.
      */
     id: string;
     /**
      * Human-readable unique account identifier
-     * Allows easily identifying the account within the Bento UI
+     * Allows easily identifying the account within the Bento UI so a human can find stats for that account.
      */
     name: string;
     /**
@@ -62,18 +63,17 @@ export type BentoSettings = {
     createdAt?: string;
   } & DynamicAttributes;
   /**
-   * Account users represent employees at your account.
-   * For example, someone named John Doe who works at AcmeCo.
-   * Or the person who would be using your software at the company who purchased it.
+   * Account users represent people at your customer-companies.
+   * For example, someone named John Doe who works at AcmeCo and uses your product.
    */
   accountUser: {
     /**
      * Unique identifier for the account user
-     * This is best set to something used internally by your app
+     * This is best set to something used internally by your app like an id.
      */
     id: string;
     /**
-     * (RECOMMENDED) Human-readable unique account user identifier
+     * (Recommended, but not required) Human-readable unique account user identifier
      * Allows easily identifying the account user within the Bento UI
      */
     fullName?: string;
@@ -93,15 +93,15 @@ export enum BentoWindowEvents {
 export enum BentoDocumentEvents {
   /** Fired when a Button or CTA is clicked within Bento */
   buttonClicked = "bento-buttonClicked",
-  /** Fired when no available guide is found */
+  /** Fired when no available Guide is found */
   noGuideFound = "bento-noGuideFound",
-  /** Fired when a guide is loaded */
+  /** Fired when a Guide is loaded */
   onGuideLoad = "bento-onGuideLoad",
-  /** You can fire this event to tell Bento to close the sidebar component */
+  /** You can fire this event to tell Bento to close the Sidebar component */
   sidebarClose = "bento-sidebarClose",
-  /** You can fire this event to tell Bento to open the sidebar component, when available */
+  /** You can fire this event to tell Bento to open the Sidebar component, when available */
   sidebarOpen = "bento-sidebarOpen",
-  /** Fired when the Inline component is loaded */
+  /** Fired when the Inline (i.e. embedded card or checklist) component is loaded */
   onInlineEmbedLoad = "bento-onInlineEmbedLoad",
   /** Fired when the Sidebar component is loaded */
   onSidebarEmbedLoad = "bento-onSidebarEmbedLoad",
@@ -122,9 +122,9 @@ export type NoGuideFoundEvent = CustomEvent<undefined>;
 export type OnGuideLoadEvent = CustomEvent<{
   /** Guide base entity id (unique per account) or `undefined` when in preview mode */
   guideBaseId?: string;
-  /** Whether this guide is of onboarding type */
+  /** Whether this Guide is an onboarding checklist */
   isOnboarding: boolean;
-  /** Whether this guide has been completed */
+  /** Whether this Guide has been completed */
   isComplete: boolean;
   /** List of all Step names */
   allSteps: Record<string, any>;
