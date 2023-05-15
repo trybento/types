@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+- Remove `CHANGELOG.md` from the list of ignored files to NPM
+
 ## 0.0.3
 
 ### Added
