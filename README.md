@@ -15,7 +15,7 @@ Common types used by Bento JavaScript SDKs.
 - [Official installation docs](https://www.notion.so/trybento/Bento-installation-d860652453b34de89420a475df379a8e)
 - [Bento website](https://www.trybento.co/?utm_source=github&utm_medium=hyperlink)
 
-# Install
+## Install
 
 Simply run the command below:
 
