@@ -2,6 +2,7 @@ export type GetEventMetadataOptions = { eventName: string };
 export type GetEventMetadataResult = {
   firstSeenAt: string;
   lastSeenAt: string;
+  receivedCount: number;
 } | null;
 
 export interface BentoSDK {
