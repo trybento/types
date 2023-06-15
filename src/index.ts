@@ -6,11 +6,6 @@ export type BentoInstance = {
    */
   initialized: boolean;
   /**
-   * Currently, this is the same as calling `initialize`.
-   *
-   * @deprecated use `initialize` instead. This will be removed on June 1, 2023 */
-  identify(bentoSettings?: BentoSettings): Promise<boolean>;
-  /**
    * Tell Bento to initialize.
    *
    * Please make sure you've set the `window.bentoSettings` object before.
