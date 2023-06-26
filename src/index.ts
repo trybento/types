@@ -1,13 +1,10 @@
+import { BentoSDK } from "./sdk";
+
 export type BentoInstance = {
   /**
    * Whether Bento is initialized.
    */
   initialized: boolean;
-  /**
-   * Currently, this is the same as calling `initialize`.
-   *
-   * @deprecated use `initialize` instead. This will be removed on June 1, 2023 */
-  identify(bentoSettings?: BentoSettings): Promise<boolean>;
   /**
    * Tell Bento to initialize.
    *
@@ -25,6 +22,10 @@ export type BentoInstance = {
    * Tip: You can always re-initialize Bento later.
    */
   reset(): Promise<boolean>;
+  /**
+   * Contains utility/helper SDK functions to access and work with Bento data.
+   */
+  sdk: BentoSDK;
 };
 
 export type DynamicAttributes = {
@@ -32,7 +33,13 @@ export type DynamicAttributes = {
    * You may also add any additional attributes you want associated with this account/accountUser within Bento,
    * for example what products they bought, their pricing tier, or user role.
    */
-  [attributeName: string]: string | Date | number | boolean | string[] | undefined;
+  [attributeName: string]:
+    | string
+    | Date
+    | number
+    | boolean
+    | string[]
+    | undefined;
 };
 
 export type BentoSettings = {
@@ -138,6 +145,8 @@ export type OnGuideLoadEvent = CustomEvent<{
 export type SidebarOpenEvent = CustomEvent<undefined>;
 export type SidebarCloseEvent = CustomEvent<undefined>;
 export type OnFormFactorEmbedLoad = CustomEvent<undefined>;
+
+export * from "./sdk";
 
 declare global {
   interface Window {
