@@ -33,13 +33,7 @@ export type DynamicAttributes = {
    * You may also add any additional attributes you want associated with this account/accountUser within Bento,
    * for example what products they bought, their pricing tier, or user role.
    */
-  [attributeName: string]:
-    | string
-    | Date
-    | number
-    | boolean
-    | string[]
-    | undefined;
+  [attributeName: string]: string | Date | number | boolean | string[] | undefined;
 };
 
 export type BentoSettings = {
@@ -118,6 +112,8 @@ export enum BentoDocumentEvents {
   onBannerEmbedLoad = "bento-onBannerEmbedLoad",
   /** Fired when the Tooltip component is loaded */
   onTooltipEmbedLoad = "bento-onTooltipEmbedLoad",
+  /** Fired when a component changes visibility state (i.e. a banner is hidden) */
+  onComponentVisibilityChange = "bento-onComponentVisibilityChange",
 }
 
 export type InitializedEvent = CustomEvent<undefined>;
@@ -145,6 +141,12 @@ export type OnGuideLoadEvent = CustomEvent<{
 export type SidebarOpenEvent = CustomEvent<undefined>;
 export type SidebarCloseEvent = CustomEvent<undefined>;
 export type OnFormFactorEmbedLoad = CustomEvent<undefined>;
+export type OnComponentVisibilityChange = CustomEvent<{
+  /** Whether the component is visible, false means hidden */
+  visible: boolean;
+  /** Which component type this is about */
+  component: "modal" | "banner";
+}>;
 
 export * from "./sdk";
 
@@ -171,5 +173,6 @@ declare global {
     [BentoDocumentEvents.onModalEmbedLoad]: OnFormFactorEmbedLoad;
     [BentoDocumentEvents.onBannerEmbedLoad]: OnFormFactorEmbedLoad;
     [BentoDocumentEvents.onTooltipEmbedLoad]: OnFormFactorEmbedLoad;
+    [BentoDocumentEvents.onComponentVisibilityChange]: OnComponentVisibilityChange;
   }
 }
