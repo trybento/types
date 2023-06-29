@@ -1,5 +1,9 @@
 import { BentoSDK } from "./sdk";
 
+//
+// Bento instance
+//
+
 export type BentoInstance = {
   /**
    * Whether Bento is initialized.
@@ -85,6 +89,10 @@ export type BentoSettings = {
     createdAt?: string;
   } & DynamicAttributes;
 };
+
+//
+// Window & document events
+//
 
 export enum BentoWindowEvents {
   /** Fired when Bento has been initialized */
@@ -175,4 +183,36 @@ declare global {
     [BentoDocumentEvents.onTooltipEmbedLoad]: OnFormFactorEmbedLoad;
     [BentoDocumentEvents.onComponentVisibilityChange]: OnComponentVisibilityChange;
   }
+}
+
+//
+// IntrinsicElements
+//
+
+type CommonBentoElementAttributes = {};
+
+export interface IntrinsicElements {
+  /**
+   * Used to programatically control where the inline component responsible for displaying
+   * the resource center and any onboarding guides should live, usually in a getting-started page
+   * shown to end-users after logging in.
+   *
+   * WARNING: We strongly recommend you use the auto-injection feature instead, where you determine
+   * the inline placement throught the Bento App and therefore you can make live changes without
+   * having to perform code-level changes.
+   *
+   * @see https://help.trybento.co/en/articles/6476765-where-will-my-onboarding-checklist-appear
+   */
+  "bento-embed": CommonBentoElementAttributes;
+
+  /**
+   * Used to programatically control where the sidebar component should live.
+   *
+   * WARNING: We strongly recommend you don't use this method of inserting the sidebar and simply let the
+   * Bento snippet dynamically insert it into the DOM. Not doing so guarantees that the sidebar component
+   * will be available everywhere in your App where Bento is present and initialized.
+   *
+   * @see https://help.trybento.co/en/articles/6810074-control-where-the-bento-sidebar-appears
+   */
+  "bento-sidebar": CommonBentoElementAttributes;
 }

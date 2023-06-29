@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
+- Types for some of Bento HTML elements (`<bento-embed />` and `<bento-sidebar />`)
 - Types for new document event `bento-onComponentVisibilityChange`
 
 ## 1.0.0
