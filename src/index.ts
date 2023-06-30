@@ -1,5 +1,9 @@
 import { BentoSDK } from "./sdk";
 
+//
+// Bento instance
+//
+
 export type BentoInstance = {
   /**
    * Whether Bento is initialized.
@@ -33,13 +37,7 @@ export type DynamicAttributes = {
    * You may also add any additional attributes you want associated with this account/accountUser within Bento,
    * for example what products they bought, their pricing tier, or user role.
    */
-  [attributeName: string]:
-    | string
-    | Date
-    | number
-    | boolean
-    | string[]
-    | undefined;
+  [attributeName: string]: string | Date | number | boolean | string[] | undefined;
 };
 
 export type BentoSettings = {
@@ -92,6 +90,10 @@ export type BentoSettings = {
   } & DynamicAttributes;
 };
 
+//
+// Window & document events
+//
+
 export enum BentoWindowEvents {
   /** Fired when Bento has been initialized */
   initialized = "bento-initialized",
@@ -118,6 +120,8 @@ export enum BentoDocumentEvents {
   onBannerEmbedLoad = "bento-onBannerEmbedLoad",
   /** Fired when the Tooltip component is loaded */
   onTooltipEmbedLoad = "bento-onTooltipEmbedLoad",
+  /** Fired when a component changes visibility state (i.e. a banner is hidden) */
+  onComponentVisibilityChange = "bento-onComponentVisibilityChange",
 }
 
 export type InitializedEvent = CustomEvent<undefined>;
@@ -145,6 +149,12 @@ export type OnGuideLoadEvent = CustomEvent<{
 export type SidebarOpenEvent = CustomEvent<undefined>;
 export type SidebarCloseEvent = CustomEvent<undefined>;
 export type OnFormFactorEmbedLoad = CustomEvent<undefined>;
+export type OnComponentVisibilityChange = CustomEvent<{
+  /** Whether the component is visible, false means hidden */
+  visible: boolean;
+  /** Which component type this is about */
+  component: "modal" | "banner";
+}>;
 
 export * from "./sdk";
 
@@ -171,5 +181,38 @@ declare global {
     [BentoDocumentEvents.onModalEmbedLoad]: OnFormFactorEmbedLoad;
     [BentoDocumentEvents.onBannerEmbedLoad]: OnFormFactorEmbedLoad;
     [BentoDocumentEvents.onTooltipEmbedLoad]: OnFormFactorEmbedLoad;
+    [BentoDocumentEvents.onComponentVisibilityChange]: OnComponentVisibilityChange;
   }
+}
+
+//
+// IntrinsicElements
+//
+
+type CommonBentoElementAttributes = {};
+
+export interface IntrinsicElements {
+  /**
+   * Used to programatically control where the inline component responsible for displaying
+   * the resource center and any onboarding guides should live, usually in a getting-started page
+   * shown to end-users after logging in.
+   *
+   * WARNING: We strongly recommend you use the auto-injection feature instead, where you determine
+   * the inline placement throught the Bento App and therefore you can make live changes without
+   * having to perform code-level changes.
+   *
+   * @see https://help.trybento.co/en/articles/6476765-where-will-my-onboarding-checklist-appear
+   */
+  "bento-embed": CommonBentoElementAttributes;
+
+  /**
+   * Used to programatically control where the sidebar component should live.
+   *
+   * WARNING: We strongly recommend you don't use this method of inserting the sidebar and simply let the
+   * Bento snippet dynamically insert it into the DOM. Not doing so guarantees that the sidebar component
+   * will be available everywhere in your App where Bento is present and initialized.
+   *
+   * @see https://help.trybento.co/en/articles/6810074-control-where-the-bento-sidebar-appears
+   */
+  "bento-sidebar": CommonBentoElementAttributes;
 }
