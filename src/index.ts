@@ -95,6 +95,8 @@ export type BentoSettings = {
 //
 
 export enum BentoWindowEvents {
+  /** Fired when Bento script has finished loading and is ready to be called */
+  loaded = "bento-loaded",
   /** Fired when Bento has been initialized */
   initialized = "bento-initialized",
 }
@@ -124,6 +126,7 @@ export enum BentoDocumentEvents {
   onComponentVisibilityChange = "bento-onComponentVisibilityChange",
 }
 
+export type LoadedEvent = CustomEvent<undefined>;
 export type InitializedEvent = CustomEvent<undefined>;
 export type ButtonClickedEvent = CustomEvent<{
   /** Either the event message or name */
@@ -167,6 +170,7 @@ declare global {
   }
 
   interface WindowEventMap {
+    [BentoWindowEvents.loaded]: LoadedEvent;
     [BentoWindowEvents.initialized]: InitializedEvent;
   }
 
