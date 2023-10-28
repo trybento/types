@@ -12,18 +12,23 @@ export type BentoInstance = {
   /**
    * Tell Bento to initialize.
    *
-   * Please make sure you've set the `window.bentoSettings` object before.
+   * You should have set the `window.bentoSettings` object before.
    *
    * Tip: If the account/accountUser is the same but their attributes changed, you should call `initialize` once again.
    */
   initialize(): Promise<boolean>;
   /**
-   * Tell Bento to fully reset. Usually called when account/accountUser has switched.
+   * Tell Bento to reset.
    *
-   * Bento will immediately clear all existing state (including the `initialized` flag),
-   * and shutdown any rendered components.
+   * You should only call this method if any of the below is true:
+   * - Account or user Ids have changed
+   * - or, Bento components got forcefully removed from the `document.body`
    *
-   * Tip: You can always re-initialize Bento later.
+   * If account or user ids have changed, Bento will fully shutdown its context and remove components from the DOM.
+   * If account or user ids are the same, but Bento components got removed, this will re-add the Bento components.
+   * If `window.bentoSettings` is still set, Bento will attempt to re-initialize itself.
+   *
+   * Tip: If you removed `window.bentoSettings` and called `reset`, you can always manually re-initialize Bento later.
    */
   reset(): Promise<boolean>;
   /**
