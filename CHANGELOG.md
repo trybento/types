@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.0
+
+### Removed
+
+- Removed invalid source maps from compiled output
+
 ## 1.4.0
 
 ### Added
