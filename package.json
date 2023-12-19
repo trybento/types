@@ -1,6 +1,6 @@
 {
   "name": "@bentoapp/types",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Common types used by Bento JavaScript SDKs",
   "author": "Bento",
   "license": "MIT",
