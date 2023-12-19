@@ -1,5 +1,8 @@
 export type GetEventMetadataOptions = { eventName: string };
 export type GetEventMetadataResult = {
+  /**
+   * Indicates whether the provided event has been received by Bento.
+   */
   received: boolean;
 
   /** @deprecated will be deprecated soon. Use `received` instead. */
